@@ -2,32 +2,18 @@
 <html lang="en">
 
 <head>
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="styles.css">
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-            integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMczTj0sF5vum1qHpAtxoqnAiq4HlT1brt/aH6k" crossorigin="anonymous">
-        <title>Electrical Minds Forum</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&family=Rowdies&display=swap" rel="stylesheet">
-    </head>
-
-    <head>
-        <!-- Link to your CSS file -->
-        <link rel="stylesheet" href="styles.css">
-    
-        <!-- Add Font Awesome CDN -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    </head>
-
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Electrical Minds Forum</title>
-
-
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&family=Rowdies&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -44,20 +30,90 @@
         </nav>
     </header>
 
-    <section class="hero" id="home">
-        <div class="hero-text">
-            <h1>Electrical</h1>
-            <h1>Minds</h1>
-            <h1>Forum</h1>
-            
-            <p>We step up, we transform</p>
-            <p>The Electrical Minds Forum (EMF) is a vibrant club dedicated to fostering innovation and collaboration
-                among students in the Electrical Engineering department.</p>
-            <a href="#contact" class="btn">Contact Us</a>
+    <section class="slideshow-container">
+        <div class="slide fade">
+            <div class="slide-content">
+                <h1>Electrical</h1>
+                <h1>Minds</h1>
+                <h1>Forum</h1>
+                <p>We step up, we transform</p>
+                <p>The Electrical Minds Forum (EMF) is a vibrant club dedicated to fostering innovation and collaboration
+                    among students in the Electrical Engineering department.</p>
+                <a href="#contact" class="btn">Contact Us</a>
+            </div>
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&h=900" alt="EMF Slide 1">
+        </div>
+
+        <div class="slide fade">
+            <div class="slide-content">
+                <h1>Innovation</h1>
+                <h1>&</h1>
+                <h1>Excellence</h1>
+                <p>Pushing boundaries in electrical engineering</p>
+                <a href="event.html" class="btn">Our Events</a>
+            </div>
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1600&h=900" alt="EMF Slide 2">
+        </div>
+
+        <div class="slide fade">
+            <div class="slide-content">
+                <h1>Join</h1>
+                <h1>Our</h1>
+                <h1>Community</h1>
+                <p>Be part of something extraordinary</p>
+                <a href="#contact" class="btn">Get Involved</a>
+            </div>
+            <img src="https://images.unsplash.com/photo-1517373116369-9bdb8cdc9f62?w=1600&h=900" alt="EMF Slide 3">
+        </div>
+
+        <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(1)">&#10095;</button>
+
+        <div class="dots-container">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
         </div>
     </section>
 
-     <section class="about" id="about">
+    <script>
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function changeSlide(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("slide");
+            let dots = document.getElementsByClassName("dot");
+
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+
+            slides[slideIndex-1].style.display = "block";
+            dots[slideIndex-1].className += " active";
+        }
+
+        // Auto advance slides
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+    </script>
+
+    <section class="about" id="about">
         <h2>Core Team</h2>
         <div class="member-group">
             <div class="member">
