@@ -19,13 +19,17 @@
 <body>
     <header>
         <img src="icons/emf logo.png" alt="EMF Logo" class="logo">
-        <nav>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="nav-menu">
             <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="event.html">Events</a></li>
                 <li><a href="gallery.html">Gallery</a></li>
-                
             </ul>
         </nav>
     </header>
@@ -240,7 +244,7 @@
                 <div class="event-details2">
                     <h3>Tech Fusion 2.0</h3>
                     <p>Get ready to witness groundbreaking innovations, cutting-edge projects, and electrifying ideas at Tech Fusion 2.0! Join us on March 7, 2025, at the External Auditorium from 10:30 AM – 3:00 PM and experience the future of technology.
-                        Don’t miss out on the biggest tech expo of the year!
+                        Don't miss out on the biggest tech expo of the year!
 
                     
                     </p>
@@ -252,7 +256,7 @@
                 </div>
                 <div class="event-details2">
                     <h3>Lumiere</h3>
-                    <p>The technical competition lumiere was conducted by emf mec in collaboration with Excel 2024 on 24 January 2025 The event coordinated by Emf the club of electrical and electronics in collaboration with Excel.</p>
+                    <p>The technical competition lumiere was conducted by emf mec in collaboration with Excel 2024 on 24 January 2025 The event coordinated by Emf the club of electrical and electronics in collaboration with Excel.</p>
                     
                 </div>
             
@@ -263,7 +267,7 @@
                 </div>
                 <div class="event-details2">
                     <h3>Autocad workshop</h3>
-                    <p>The workshop covered topics such as basic design principles, 3D modeling, and practical applications in engineering. Attendees engaged in hands-on sessions where they learned to use CAD software for creating and simulating designs, which provided a real-world perspective on the power of digital design. </p>
+                    <p>The workshop covered topics such as basic design principles, 3D modeling, and practical applications in engineering. Attendees engaged in hands-on sessions where they learned to use CAD software for creating and simulating designs, which provided a real-world perspective on the power of digital design. </p>
                 </div>
             </div>
         </div>
@@ -362,6 +366,83 @@
         <p>Contact us at: support@emfclub.com</p>
     </footer>
     
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            const body = document.body;
+            let isMenuOpen = false;
+
+            function toggleMenu(event) {
+                if (event) {
+                    event.stopPropagation();
+                }
+                isMenuOpen = !isMenuOpen;
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+                body.style.overflow = isMenuOpen ? 'hidden' : '';
+            }
+
+            // Toggle menu on hamburger click
+            hamburger.addEventListener('click', toggleMenu);
+
+            // Close menu when clicking on a link
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (isMenuOpen) {
+                        toggleMenu();
+                    }
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (isMenuOpen && !navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+                    toggleMenu();
+                }
+            });
+
+            // Prevent clicks inside menu from closing it
+            navMenu.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+
+            // Close menu on resize if open
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768 && isMenuOpen) {
+                    toggleMenu();
+                }
+            });
+
+            // Handle touch events for mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            document.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, false);
+
+            document.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, false);
+
+            function handleSwipe() {
+                const swipeThreshold = 100;
+                const swipeDistance = touchEndX - touchStartX;
+
+                if (Math.abs(swipeDistance) > swipeThreshold) {
+                    if (swipeDistance > 0 && !isMenuOpen) {
+                        // Swipe right, open menu
+                        toggleMenu();
+                    } else if (swipeDistance < 0 && isMenuOpen) {
+                        // Swipe left, close menu
+                        toggleMenu();
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>
